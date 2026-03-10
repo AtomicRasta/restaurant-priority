@@ -11,6 +11,7 @@ _Updated by NattyDread. Delivered daily at 9:00 AM and 4:00 PM Arizona time._
 
 - [ ] Trading Riot strategy review
 - [ ] Buy a monitor/keyboard switch
+- [ ] Make a Rasta Hub web page
 
 ## 🟢 Low Priority
 
