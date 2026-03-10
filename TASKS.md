@@ -5,7 +5,6 @@ _Updated by NattyDread. Delivered daily at 9:00 AM and 4:00 PM Arizona time._
 ## 🔴 High Priority
 
 - [ ] Reply to Dr. Brian
-- [ ] Cancel xCloud hosting
 
 ## 🟡 Medium Priority
 
@@ -18,4 +17,5 @@ _Updated by NattyDread. Delivered daily at 9:00 AM and 4:00 PM Arizona time._
 ## ✅ Completed
 
 - [x] Make a Rasta Hub web page
+- [x] Cancel xCloud hosting
 
