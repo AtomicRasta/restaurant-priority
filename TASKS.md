@@ -11,7 +11,6 @@ _Updated by NattyDread. Delivered daily at 9:00 AM and 4:00 PM Arizona time._
 - [ ] Trading Riot strategy review
 - [ ] Buy a monitor/keyboard switch
 - [ ] Claim Apex
-- [ ] Get ETH off of Aave
 - [ ] Buy Cubs tickets
 
 ## 🟢 Low Priority
@@ -21,4 +20,5 @@ _Updated by NattyDread. Delivered daily at 9:00 AM and 4:00 PM Arizona time._
 
 - [x] Make a Rasta Hub web page
 - [x] Cancel xCloud hosting
+- [x] Get ETH off of Aave
 
