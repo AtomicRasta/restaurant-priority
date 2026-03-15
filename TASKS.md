@@ -12,6 +12,7 @@ _Updated by NattyDread. Delivered daily at 9:00 AM and 4:00 PM Arizona time._
 - [ ] Buy a monitor/keyboard switch
 - [ ] Claim Apex
 - [ ] Buy Cubs tickets
+- [ ] Approve Maurice and Julian
 
 ## 🟢 Low Priority
 
