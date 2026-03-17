@@ -12,7 +12,6 @@ _Updated by NattyDread. Delivered daily at 9:00 AM and 4:00 PM Arizona time._
 - [ ] Buy a monitor/keyboard switch
 - [ ] Claim Apex
 - [ ] Buy Cubs tickets
-- [ ] Approve Maurice and Julian
 - [ ] Jujitsu Tribe website
 
 ## 🟢 Low Priority
@@ -23,4 +22,5 @@ _Updated by NattyDread. Delivered daily at 9:00 AM and 4:00 PM Arizona time._
 - [x] Make a Rasta Hub web page
 - [x] Cancel xCloud hosting
 - [x] Get ETH off of Aave
+- [x] Approve Maurice and Julian
 
