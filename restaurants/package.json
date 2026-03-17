@@ -1,0 +1,8 @@
+{
+  "name": "restaurant-priority",
+  "version": "1.0.0",
+  "description": "Restaurant availability tracking and prioritization",
+  "scripts": {
+    "start": "python3 -m http.server 8080 --directory public"
+  }
+}

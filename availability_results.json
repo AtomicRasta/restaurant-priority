@@ -1,0 +1,132 @@
+{
+  "Kid Sister": [
+    {
+      "day": "Fri 3/14",
+      "slots": []
+    },
+    {
+      "day": "Sat 3/15",
+      "slots": []
+    }
+  ],
+  "Maple & Ash": [
+    {
+      "day": "Fri 3/14",
+      "slots": []
+    },
+    {
+      "day": "Sat 3/15",
+      "slots": []
+    }
+  ],
+  "Catch": [
+    {
+      "day": "Fri 3/14",
+      "slots": []
+    },
+    {
+      "day": "Sat 3/15",
+      "slots": []
+    }
+  ],
+  "Nobu": [
+    {
+      "day": "Fri 3/14",
+      "slots": []
+    },
+    {
+      "day": "Sat 3/15",
+      "slots": []
+    }
+  ],
+  "Jing": [
+    {
+      "day": "Fri 3/14",
+      "slots": []
+    },
+    {
+      "day": "Sat 3/15",
+      "slots": []
+    }
+  ],
+  "Sexy Roman": [
+    {
+      "day": "Fri 3/14",
+      "slots": []
+    },
+    {
+      "day": "Sat 3/15",
+      "slots": []
+    }
+  ],
+  "Shiv Supper Club": [
+    {
+      "day": "Fri 3/14",
+      "slots": []
+    },
+    {
+      "day": "Sat 3/15",
+      "slots": []
+    }
+  ],
+  "40 Love": [
+    {
+      "day": "Fri 3/14",
+      "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.opentable.com/r/40-love-scottsdale?dateTime="
+    },
+    {
+      "day": "Sat 3/15",
+      "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.opentable.com/r/40-love-scottsdale?dateTime="
+    }
+  ],
+  "FLINT by Baltaire": [
+    {
+      "day": "Fri 3/14",
+      "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.opentable.com/r/flint-by-baltaire-scottsdale"
+    },
+    {
+      "day": "Sat 3/15",
+      "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.opentable.com/r/flint-by-baltaire-scottsdale"
+    }
+  ],
+  "Bourbon & Bones": [
+    {
+      "day": "Fri 3/14",
+      "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.opentable.com/r/bourbon-and-bones-scottsdale"
+    },
+    {
+      "day": "Sat 3/15",
+      "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.opentable.com/r/bourbon-and-bones-scottsdale"
+    }
+  ],
+  "Society Swan": [
+    {
+      "day": "Fri 3/14",
+      "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.opentable.com/r/society-swan-reservations-sc"
+    },
+    {
+      "day": "Sat 3/15",
+      "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.opentable.com/r/society-swan-reservations-sc"
+    }
+  ],
+  "Cleaverman": [
+    {
+      "day": "Fri 3/14",
+      "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.opentable.com/r/cleaverman-scottsdale?dateTi"
+    },
+    {
+      "day": "Sat 3/15",
+      "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.opentable.com/r/cleaverman-scottsdale?dateTi"
+    }
+  ],
+  "Hainoo": [
+    {
+      "day": "Fri 3/14",
+      "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.opentable.com/r/hai-noon-reservations-scotts"
+    },
+    {
+      "day": "Sat 3/15",
+      "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.opentable.com/r/hai-noon-reservations-scotts"
+    }
+  ]
+}

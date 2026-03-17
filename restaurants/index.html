@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rasta's Table — Scottsdale & Phoenix Dining Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg-deep:#0c0a09;
+  --bg-card:#1a1714;
+  --bg-card-hover:#231f1a;
+  --gold:#c8a45e;
+  --gold-dim:#9a7d3e;
+  --gold-bright:#e4c780;
+  --amber:#d4943a;
+  --cream:#f5efe6;
+  --cream-dim:#b8b0a3;
+  --cream-faint:#6b6560;
+  --section-haven:#c8a45e;
+  --section-return:#8fba7f;
+  --section-notopen:#7ca8c4;
+  --section-special:#d4789a;
+  --section-cocktail:#c47c5a;
+  --font-display:'Playfair Display',Georgia,serif;
+  --font-body:'Cormorant Garamond','Libre Baskerville',Georgia,serif;
+  --nav-height:56px;
+}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-height) + 24px)}
+body{
+  font-family:var(--font-body);
+  background:var(--bg-deep);
+  color:var(--cream);
+  line-height:1.6;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+/* Grain overlay */
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
+  opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size:128px 128px;
+}
+
+/* ─── HERO ─── */
+.hero{
+  min-height:100vh;min-height:100dvh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:2rem;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 40%, rgba(200,164,94,.10) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 80% at 80% 80%, rgba(212,148,58,.06) 0%, transparent 60%);
+  pointer-events:none;
+}
+.hero-title{
+  font-family:var(--font-display);
+  font-size:clamp(3rem,8vw,7rem);
+  font-weight:700;
+  letter-spacing:-.02em;
+  color:var(--cream);
+  line-height:1.05;
+  margin-bottom:.5rem;
+  opacity:0;transform:translateY(30px);
+  animation:fadeUp .9s cubic-bezier(.22,1,.36,1) .3s forwards;
+}
+.hero-title em{
+  font-style:italic;color:var(--gold);
+}
+.hero-sub{
+  font-family:var(--font-body);
+  font-size:clamp(1rem,2.5vw,1.35rem);
+  font-weight:300;
+  color:var(--cream-dim);
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  margin-bottom:2.5rem;
+  opacity:0;transform:translateY(20px);
+  animation:fadeUp .9s cubic-bezier(.22,1,.36,1) .55s forwards;
+}
+.hero-divider{
+  width:60px;height:1px;background:var(--gold);margin:0 auto 2rem;
+  opacity:0;animation:fadeUp .9s cubic-bezier(.22,1,.36,1) .7s forwards;
+}
+.hero-scroll{
+  opacity:0;animation:fadeUp .9s cubic-bezier(.22,1,.36,1) .85s forwards;
+  cursor:pointer;
+}
+.hero-scroll svg{
+  width:28px;height:28px;stroke:var(--gold-dim);
+  animation:bobble 2.5s ease-in-out infinite;
+}
+
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+@keyframes bobble{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+/* ─── NAV ─── */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(12,10,9,.85);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(200,164,94,.1);
+  height:var(--nav-height);
+  display:flex;align-items:center;
+  padding:0 1.5rem;
+  transition:box-shadow .3s;
+}
+.nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.5)}
+.nav-inner{
+  max-width:1200px;margin:0 auto;width:100%;
+  display:flex;align-items:center;gap:1rem;
+  overflow-x:auto;scrollbar-width:none;
+  -ms-overflow-style:none;
+}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-brand{
+  font-family:var(--font-display);
+  font-size:1.05rem;font-weight:600;
+  color:var(--gold);white-space:nowrap;
+  margin-right:auto;
+  letter-spacing:.01em;
+}
+.nav-link{
+  font-family:var(--font-body);
+  font-size:.85rem;font-weight:500;
+  color:var(--cream-dim);
+  text-decoration:none;white-space:nowrap;
+  padding:.35rem .65rem;
+  border-radius:4px;
+  transition:color .25s,background .25s;
+  letter-spacing:.04em;
+}
+.nav-link:hover,.nav-link.active{color:var(--gold);background:rgba(200,164,94,.08)}
+
+/* ─── SECTIONS ─── */
+.section{
+  max-width:1200px;margin:0 auto;
+  padding:5rem 1.5rem 3rem;
+}
+.section-header{
+  margin-bottom:3rem;
+  opacity:0;transform:translateY(24px);
+  transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);
+}
+.section-header.visible{opacity:1;transform:translateY(0)}
+.section-emoji{font-size:1.6rem;display:block;margin-bottom:.5rem}
+.section-title{
+  font-family:var(--font-display);
+  font-size:clamp(1.8rem,4vw,2.6rem);
+  font-weight:600;
+  letter-spacing:-.01em;
+  line-height:1.15;
+}
+.section-count{
+  font-family:var(--font-body);
+  font-size:.95rem;
+  color:var(--cream-faint);
+  margin-top:.4rem;
+  font-weight:300;
+  letter-spacing:.05em;
+}
+.section-line{
+  width:40px;height:2px;margin-top:1rem;
+  border-radius:1px;
+}
+
+/* Section accent colors */
+#havent-been .section-title{color:var(--section-haven)}
+#havent-been .section-line{background:var(--section-haven)}
+#would-return .section-title{color:var(--section-return)}
+#would-return .section-line{background:var(--section-return)}
+#not-open .section-title{color:var(--section-notopen)}
+#not-open .section-line{background:var(--section-notopen)}
+#special .section-title{color:var(--section-special)}
+#special .section-line{background:var(--section-special)}
+#cocktails .section-title{color:var(--section-cocktail)}
+#cocktails .section-line{background:var(--section-cocktail)}
+
+/* ─── CARDS GRID ─── */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:1rem;
+}
+.card{
+  background:var(--bg-card);
+  border:1px solid rgba(200,164,94,.07);
+  border-radius:10px;
+  padding:1.4rem 1.5rem;
+  position:relative;
+  transition:background .3s,border-color .3s,transform .25s;
+  opacity:0;transform:translateY(20px);
+}
+.card.visible{
+  opacity:1;transform:translateY(0);
+  transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1),background .3s,border-color .3s;
+}
+.card:hover{
+  background:var(--bg-card-hover);
+  border-color:rgba(200,164,94,.18);
+  transform:translateY(-2px);
+}
+.card-name{
+  font-family:var(--font-display);
+  font-size:1.2rem;
+  font-weight:600;
+  color:var(--cream);
+  margin-bottom:.55rem;
+  line-height:1.25;
+  letter-spacing:.005em;
+}
+.card-notes{
+  font-family:var(--font-body);
+  font-size:.92rem;
+  color:var(--cream-dim);
+  font-style:italic;
+  margin-bottom:.75rem;
+  line-height:1.45;
+  font-weight:300;
+}
+.card-links{
+  display:flex;gap:.6rem;align-items:center;
+  flex-wrap:wrap;
+}
+.card-link{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:32px;height:32px;
+  border-radius:6px;
+  background:rgba(200,164,94,.06);
+  border:1px solid rgba(200,164,94,.08);
+  color:var(--cream-faint);
+  text-decoration:none;
+  transition:color .25s,background .25s,border-color .25s;
+}
+.card-link:hover{
+  color:var(--gold);
+  background:rgba(200,164,94,.12);
+  border-color:rgba(200,164,94,.22);
+}
+.card-link svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* Highlight badge for Uchi */
+.card-highlight{
+  position:absolute;top:1rem;right:1rem;
+  font-size:.65rem;
+  font-family:var(--font-body);
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color:var(--gold);
+  background:rgba(200,164,94,.1);
+  border:1px solid rgba(200,164,94,.2);
+  padding:.2rem .55rem;
+  border-radius:3px;
+  font-weight:500;
+}
+
+/* ─── FOOTER ─── */
+.footer{
+  text-align:center;
+  padding:4rem 1.5rem 3rem;
+  color:var(--cream-faint);
+  font-size:.85rem;
+  font-weight:300;
+  letter-spacing:.05em;
+}
+.footer-brand{
+  font-family:var(--font-display);
+  font-size:1.1rem;
+  color:var(--gold-dim);
+  margin-bottom:.5rem;
+  font-weight:600;
+}
+.footer-line{
+  width:30px;height:1px;background:rgba(200,164,94,.2);
+  margin:1rem auto;
+}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:640px){
+  .cards{grid-template-columns:1fr}
+  .section{padding:3.5rem 1rem 2rem}
+  .nav-brand{font-size:.95rem;margin-right:.5rem}
+  .nav-link{font-size:.78rem;padding:.3rem .5rem}
+  .hero{min-height:85vh;min-height:85dvh}
+}
+@media(min-width:641px) and (max-width:900px){
+  .cards{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <h1 class="hero-title">Rasta's <em>Table</em></h1>
+  <p class="hero-sub">Scottsdale &amp; Phoenix Dining</p>
+  <div class="hero-divider"></div>
+  <a class="hero-scroll" href="#havent-been" aria-label="Scroll to content">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"/>
+    </svg>
+  </a>
+</section>
+
+<!-- ─── NAV ─── -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <span class="nav-brand">Rasta's Table</span>
+    <a class="nav-link" href="#havent-been">🆕 Haven't Been</a>
+    <a class="nav-link" href="#would-return">🔄 Would Return</a>
+    <a class="nav-link" href="#not-open">👀 Not Open Yet</a>
+    <a class="nav-link" href="#special">🥂 Special Occasion</a>
+    <a class="nav-link" href="#cocktails">🍸 Cocktails</a>
+  </div>
+</nav>
+
+<!-- ─── HAVEN'T BEEN YET ─── -->
+<section class="section" id="havent-been">
+  <div class="section-header">
+    <span class="section-emoji">🆕</span>
+    <h2 class="section-title">Haven't Been Yet</h2>
+    <p class="section-count">19 spots on the radar</p>
+    <div class="section-line"></div>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-name">40 Love</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.40lovegroup.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/40lovescottsdale" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=40+Love+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Cleaverman</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.cleaverman.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/cleaverman" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Cleaverman+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">DiMaggios</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.dimaggiosphx.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/dimaggiosphx" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=DiMaggios+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Society Swan</div>
+      <div class="card-links">
+        <a class="card-link" href="https://societyswan.com/locations/scottsdale/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/societyswan" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Society+Swan+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Sexy Roman</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.thesexyroman.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/thesexyroman" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Sexy+Roman+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Shiv Supper Club</div>
+      <div class="card-links">
+        <a class="card-link" href="https://shivsupperclub.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/shivsupperclub" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Shiv+Supper+Club+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Jing</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.jingscottsdale.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/jingscottsdale" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Jing+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Akamura</div>
+      <div class="card-notes">Scottsdale location</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.akamaruscottsdale.com/locations" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/akamaruscottsdale" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Akamura+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Catch</div>
+      <div class="card-notes">Scottsdale location</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.catchrestaurants.com/location/catch-scottsdale/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/catchscottsdale" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Catch+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Hainoo</div>
+      <div class="card-links">
+        <a class="card-link" href="https://hainoonaz.com/home" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/hainoonaz" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Hainoo+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Nobu</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.noburestaurants.com/scottsdale/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/noburestaurants" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Nobu+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Chico Malo</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.chicomalo.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/chicomalophx" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Chico+Malo+Phoenix+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Bourbon & Bones</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.bourbonandbones.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/bourbonandbones" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Bourbon+and+Bones+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Kid Sister Wine and Food Bar</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.kidsisterphx.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/kidsisterphx/" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Kid+Sister+Wine+and+Food+Bar+Phoenix+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Cocina Chiwas</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.cocinachiwas.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/cocinachiwas/" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Cocina+Chiwas+Phoenix+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">FLINT by Baltaire</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.flintbybaltaire.com/dinner-menu" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/flintbybaltaire" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=FLINT+by+Baltaire+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Mowry and Cotton</div>
+      <div class="card-notes">At The Phoenician</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.mowryandcotton.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/mowryandcotton" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Mowry+and+Cotton+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Maple & Ash</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.mapleandash.com/scottsdale" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/mapleandash" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Maple+and+Ash+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Confluence</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.confluencerestaurant.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/confluencephx" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Confluence+Restaurant+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── WOULD RETURN ─── -->
+<section class="section" id="would-return">
+  <div class="section-header">
+    <span class="section-emoji">🔄</span>
+    <h2 class="section-title">Would Return</h2>
+    <p class="section-count">23 spots worth going back to</p>
+    <div class="section-line"></div>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-name">Buck and Rider</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.buckandrider.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/buckandrider" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Buck+and+Rider+Phoenix+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Pinyon</div>
+      <div class="card-links">
+        <a class="card-link" href="https://pinyonrestaurant.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/pinyonrestaurant" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Pinyon+Restaurant+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">FnB</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.fnbrestaurant.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/fnbrestaurant" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=FnB+Restaurant+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Bacanora</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.bacanoraphx.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/bacanoraphx" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Bacanora+Phoenix+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Tratto</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.trattophx.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/trattophx" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Tratto+Phoenix+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Elephante</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.elephanterestaurant.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/elephanterestaurant" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Elephante+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Pretty Penny</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.prettypennyphx.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/in.taste.we.trust/" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Pretty+Penny+Phoenix+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Elephantela</div>
+      <div class="card-notes">Scottsdale location</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.elephantela.com/location/scottsdale/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/elephantela" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Elephantela+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-highlight">★ Favorite</span>
+      <div class="card-name">Uchi</div>
+      <div class="card-notes">Highlighted — must be a favorite</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.uchirestaurants.com/scottsdale/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/uchiscottsdale" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Uchi+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Huarachis</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.huarachisphx.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/huarachis.phx/" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Huarachis+Phoenix+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Pizzeria Bianco</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.pizzeriabianco.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/pizzeriabianco" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Pizzeria+Bianco+Phoenix+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Persepshen</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.persepshen.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/persepshen" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Persepshen+Phoenix+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Rokerij</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.rokerijscottsdale.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/rokerijscottsdale" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Rokerij+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Valentine</div>
+      <div class="card-links">
+        <a class="card-link" href="http://www.valentinephx.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/valentine_phx" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Valentine+Phoenix+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Sottsie</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.sottisephx.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/sottisephx" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Sottsie+Phoenix+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Vecina</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.vecinaphx.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/vecinaphx" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Vecina+Phoenix+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Kauboi at the Remy</div>
+      <div class="card-links">
+        <a class="card-link" href="https://kauboiscottsdale.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/kauboiscottsdale" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Kauboi+at+the+Remy+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Espiritu Mesa</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.espiritumesa.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/espiritumesa" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Espiritu+Mesa+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">The Ends</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.endsrestaurant.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/endsrestaurant" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=The+Ends+Restaurant+Phoenix+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Cala</div>
+      <div class="card-notes">Scottsdale</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.calascottsdale.com/menu" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/calascottsdale" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Cala+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Tia Carmen</div>
+      <div class="card-notes">JW Marriott Desert Ridge</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.tiacarmenaz.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/tiacarmenaz" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Tia+Carmen+JW+Marriott+Desert+Ridge+Phoenix+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Hush</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.hushpublichouse.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/hushpublichouse" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Hush+Public+House+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Wren and Wolf</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.wrenandwolfaz.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/wrenandwolfaz" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Wren+and+Wolf+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── NOT OPEN YET ─── -->
+<section class="section" id="not-open">
+  <div class="section-header">
+    <span class="section-emoji">👀</span>
+    <h2 class="section-title">Not Open Yet</h2>
+    <p class="section-count">4 spots on the watch list</p>
+    <div class="section-line"></div>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-name">Cowboy Seafood</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.cowboyseafoodaz.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/cowboyseafoodaz" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Cowboy+Seafood+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Drakes</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.drakeshollywood.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/drakeshollywood" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Drakes+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Nadu Indian Restaurant</div>
+      <div class="card-notes">Coming to Desert Ridge</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.nadurestaurant.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/nadurestaurant" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Nadu+Indian+Restaurant+Desert+Ridge+Phoenix+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Din Tai Fung</div>
+      <div class="card-links">
+        <a class="card-link" href="https://dintaifungusa.com/us/menu.html" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/dintaifungusa" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Din+Tai+Fung+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── SPECIAL OCCASION ─── -->
+<section class="section" id="special">
+  <div class="section-header">
+    <span class="section-emoji">🥂</span>
+    <h2 class="section-title">Special Occasion</h2>
+    <p class="section-count">3 spots for when it matters</p>
+    <div class="section-line"></div>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-name">Reserve</div>
+      <div class="card-notes">New concept from Monarch</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.reserveoldtown.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/reserveoldtown" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Reserve+Old+Town+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Anhelo</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.anhelorestaurant.com/general-8" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/anhelorestaurant" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Anhelo+Restaurant+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Christophers</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.christophersaz.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/christophersaz" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Christophers+Restaurant+Phoenix+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── COCKTAIL BARS ─── -->
+<section class="section" id="cocktails">
+  <div class="section-header">
+    <span class="section-emoji">🍸</span>
+    <h2 class="section-title">Cocktail Bars</h2>
+    <p class="section-count">13 spots to drink well</p>
+    <div class="section-line"></div>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-name">Killer Whale Sex Club</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.killerwhalesexclub.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/killerwhalesexclub" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Killer+Whale+Sex+Club+Phoenix+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Bitter & Twisted</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.bitterandtwistedaz.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/baboraglobal" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Bitter+and+Twisted+Phoenix+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">FYPM</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.fypmbar.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/fypmbar" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=FYPM+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Legends Never Die</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.legendsneverdiephx.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/legendsneverdiephx" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Legends+Never+Die+Phoenix+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Little Rituals</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.littlerituals.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/littlerituals" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Little+Rituals+Phoenix+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Platform 18 — Century Grand</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.centurygrandphx.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/centurygrandphx" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Platform+18+Century+Grand+Phoenix+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Grey Hen Rx</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.greyhenrx.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/greyhenrx" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Grey+Hen+Rx+Phoenix+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Undertow</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.undertowbar.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/undertowbar" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Undertow+Phoenix+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Tell Your Friends</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.tellyourfriendsbar.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/tellyourfriendsbar" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Tell+Your+Friends+Phoenix+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">The Trophy Room</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.thetrophyroombar.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/thetrophyroombar" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=The+Trophy+Room+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Carry On Airlines</div>
+      <div class="card-notes">Best New Cocktail Bar</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.carryonairlines.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/carryonairlines" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Carry+On+Airlines+Scottsdale+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Highball</div>
+      <div class="card-notes">Best Bar Team — Libby Lingua (U.S. Bartender of the Year), Jason Ahser (Best U.S. Bar Mentor)</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.highballphx.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/highballphx" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Highball+Phoenix+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-name">Valentine</div>
+      <div class="card-notes">Best U.S. Restaurant Bar — also in Would Return list</div>
+      <div class="card-links">
+        <a class="card-link" href="http://www.valentinephx.com/" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a class="card-link" href="https://www.instagram.com/valentine_phx" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a class="card-link" href="https://www.google.com/maps/search/?api=1&query=Valentine+Phoenix+AZ" target="_blank" rel="noopener" title="Map"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer class="footer">
+  <div class="footer-brand">Rasta's Table</div>
+  <div class="footer-line"></div>
+  <p>A personal dining guide for Scottsdale &amp; Phoenix</p>
+</footer>
+
+<script>
+// ─── Intersection Observer for scroll animations ───
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      if (entry.target.classList.contains('card')) {
+        // Stagger cards within same section
+        const cards = Array.from(entry.target.parentElement.children);
+        const index = cards.indexOf(entry.target);
+        entry.target.style.transitionDelay = `${index * 60}ms`;
+      }
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.section-header, .card').forEach(el => observer.observe(el));
+
+// ─── Sticky nav scroll state ───
+const nav = document.getElementById('mainNav');
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('.section');
+
+window.addEventListener('scroll', () => {
+  // Nav shadow
+  nav.classList.toggle('scrolled', window.scrollY > 100);
+
+  // Active section highlight
+  let current = '';
+  sections.forEach(section => {
+    const top = section.offsetTop - 100;
+    if (window.scrollY >= top) current = section.id;
+  });
+  navLinks.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+  });
+}, { passive: true });
+</script>
+</body>
+</html>
