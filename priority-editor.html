@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant Priority Editor</title>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #0c0a09;
+  color: #f5efe6;
+  padding: 2rem;
+  line-height: 1.6;
+}
+.header {
+  max-width: 1200px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+h1 {
+  font-size: 2.5rem;
+  color: #c8a45e;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  color: #b8b0a3;
+  margin-bottom: 2rem;
+}
+.controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-primary {
+  background: #c8a45e;
+  color: #0c0a09;
+  font-weight: 600;
+}
+.btn-primary:hover {
+  background: #e4c780;
+  transform: translateY(-1px);
+}
+.btn-secondary {
+  background: #1a1714;
+  color: #f5efe6;
+  border: 1px solid #c8a45e;
+}
+.btn-secondary:hover {
+  background: #231f1a;
+}
+.sections {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  gap: 2rem;
+}
+.section {
+  background: #1a1714;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid rgba(200, 164, 94, 0.2);
+}
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(200, 164, 94, 0.3);
+}
+.section-title {
+  font-size: 1.5rem;
+  color: #c8a45e;
+}
+.section-count {
+  background: rgba(200, 164, 94, 0.2);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: #c8a45e;
+}
+.restaurant-list {
+  display: grid;
+  gap: 0.75rem;
+}
+.restaurant-item {
+  background: #231f1a;
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+}
+.restaurant-item:hover {
+  border-color: #c8a45e;
+  transform: translateX(4px);
+}
+.drag-handle {
+  cursor: grab;
+  font-size: 1.5rem;
+  color: #6b6560;
+  user-select: none;
+}
+.drag-handle:active {
+  cursor: grabbing;
+}
+.restaurant-item.sortable-ghost {
+  opacity: 0.4;
+}
+.restaurant-item.sortable-drag {
+  opacity: 0.8;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+.priority-number {
+  min-width: 32px;
+  height: 32px;
+  background: rgba(200, 164, 94, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #c8a45e;
+}
+.restaurant-info {
+  flex: 1;
+}
+.restaurant-name {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+.restaurant-meta {
+  font-size: 0.9rem;
+  color: #b8b0a3;
+}
+.platform-badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.platform-resy {
+  background: rgba(218, 98, 82, 0.2);
+  color: #da6252;
+}
+.platform-opentable {
+  background: rgba(218, 55, 67, 0.2);
+  color: #da3743;
+}
+.platform-tock {
+  background: rgba(0, 169, 224, 0.2);
+  color: #00a9e0;
+}
+.platform-unknown {
+  background: rgba(107, 101, 96, 0.2);
+  color: #6b6560;
+}
+.save-status {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: #1a1714;
+  border: 1px solid #c8a45e;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s;
+  pointer-events: none;
+}
+.save-status.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🦁 Restaurant Priority Editor</h1>
+  <p class="subtitle">Drag to reorder • Priority determines automation check sequence</p>
+  <div class="controls">
+    <button class="btn btn-primary" onclick="saveOrder()">💾 Save Order</button>
+    <button class="btn btn-secondary" onclick="resetOrder()">↺ Reset to Default</button>
+    <button class="btn btn-secondary" onclick="exportJSON()">📥 Export JSON</button>
+  </div>
+</div>
+
+<div class="sections" id="sections"></div>
+
+<div class="save-status" id="saveStatus">✓ Order saved successfully</div>
+
+<script>
+// Restaurant data with platforms
+const restaurantData = {
+  haventBeenYet: [
+    {name: "Kid Sister", platform: "resy", url: "https://resy.com/cities/phoenix-az/venues/kid-sister"},
+    {name: "Maple & Ash", platform: "resy", url: "https://resy.com/cities/phoenix-az/venues/maple-and-ash-scottsdale"},
+    {name: "Catch", platform: "resy", url: "https://resy.com/cities/phoenix-az/venues/catch-scottsdale"},
+    {name: "Nobu", platform: "resy", url: "https://resy.com/cities/phoenix-az/venues/nobu-scottsdale"},
+    {name: "Jing", platform: "resy", url: "https://resy.com/cities/phoenix-az/venues/jing-scottsdale"},
+    {name: "Sexy Roman", platform: "resy", url: "https://resy.com/cities/phoenix-az/venues/the-sexy-roman-scottsdale"},
+    {name: "Shiv Supper Club", platform: "resy", url: "https://resy.com/cities/phoenix-az/venues/shiv-supper-club"},
+    {name: "40 Love", platform: "opentable", url: "https://www.opentable.com/r/40-love-scottsdale"},
+    {name: "FLINT by Baltaire", platform: "opentable", url: "https://www.opentable.com/r/flint-by-baltaire-scottsdale"},
+    {name: "Bourbon & Bones", platform: "opentable", url: "https://www.opentable.com/r/bourbon-and-bones-scottsdale"},
+    {name: "Society Swan", platform: "opentable", url: "https://www.opentable.com/r/society-swan-reservations-scottsdale"},
+    {name: "Cleaverman", platform: "opentable", url: "https://www.opentable.com/r/cleaverman-scottsdale"},
+    {name: "Hainoo", platform: "opentable", url: "https://www.opentable.com/r/hai-noon-reservations-scottsdale"},
+    {name: "Mowry and Cotton", platform: "opentable", url: "https://www.opentable.com/r/mowry-and-cotton-scottsdale"}
+  ],
+  wouldReturn: [
+    {name: "Buck and Rider", platform: "opentable", url: "https://www.opentable.com/r/buck-and-rider-scottsdale"},
+    {name: "Uchi", platform: "resy", url: "https://resy.com/cities/phoenix-az/venues/uchi"},
+    {name: "Pizzeria Bianco", platform: "resy", url: "https://resy.com/cities/phoenix-az/venues/pizzeria-bianco"},
+    {name: "FnB", platform: "resy", url: "https://resy.com/cities/phoenix-az/venues/fnb"},
+    {name: "Bacanora", platform: "resy", url: "https://resy.com/cities/phoenix-az/venues/bacanora"},
+    {name: "Tratto", platform: "resy", url: "https://resy.com/cities/phoenix-az/venues/tratto"},
+    {name: "Elephante", platform: "resy", url: "https://resy.com/cities/phoenix-az/venues/elephante"},
+    {name: "Pinyon", platform: "resy", url: "https://resy.com/cities/phoenix-az/venues/pinyon"},
+    {name: "Valentine", platform: "resy", url: "https://resy.com/cities/phoenix-az/venues/valentine"},
+    {name: "The Ends", platform: "resy", url: "https://resy.com/cities/phoenix-az/venues/the-ends"},
+    {name: "Vecina", platform: "resy", url: "https://resy.com/cities/phoenix-az/venues/vecina"},
+    {name: "Huarachis", platform: "resy", url: "https://resy.com/cities/phoenix-az/venues/huarachis"}
+  ],
+  specialOccasion: [
+    {name: "Reserve (Monarch)", platform: "tock", url: "https://www.exploretock.com/reserveoldtown"},
+    {name: "Anhelo", platform: "resy", url: "https://resy.com/cities/phoenix-az/venues/anhelo"},
+    {name: "Christophers", platform: "opentable", url: "https://www.opentable.com/r/christophers-scottsdale"}
+  ],
+  cocktailBars: [
+    {name: "Killer Whale Sex Club", platform: "none", url: ""},
+    {name: "Bitter & Twisted", platform: "none", url: ""},
+    {name: "FYPM", platform: "none", url: ""},
+    {name: "Legends Never Die", platform: "none", url: ""},
+    {name: "Little Rituals", platform: "resy", url: "https://resy.com/cities/phoenix-az/venues/little-rituals"},
+    {name: "Platform 18 - Century Grand", platform: "resy", url: "https://resy.com/cities/phoenix-az/venues/century-grand"},
+    {name: "Grey Hen Rx", platform: "none", url: ""},
+    {name: "Undertow", platform: "resy", url: "https://resy.com/cities/phoenix-az/venues/undertow"},
+    {name: "Tell Your Friends", platform: "none", url: ""},
+    {name: "The Trophy Room", platform: "none", url: ""},
+    {name: "Carry On Airlines", platform: "none", url: ""},
+    {name: "Highball", platform: "resy", url: "https://resy.com/cities/phoenix-az/venues/highball"},
+    {name: "Valentine", platform: "resy", url: "https://resy.com/cities/phoenix-az/venues/valentine"}
+  ]
+};
+
+const sectionTitles = {
+  haventBeenYet: "Haven't Been Yet",
+  wouldReturn: "Would Return",
+  specialOccasion: "Special Occasion",
+  cocktailBars: "Cocktail Bars"
+};
+
+let sortables = {};
+
+function loadSavedOrder() {
+  const saved = localStorage.getItem('restaurantPriority');
+  if (saved) {
+    const parsed = JSON.parse(saved);
+    // Check if saved data has all sections - if not, reset
+    if (!parsed.specialOccasion || !parsed.cocktailBars) {
+      console.log('Outdated saved data detected - loading fresh data');
+      return restaurantData;
+    }
+    return parsed;
+  }
+  return restaurantData;
+}
+
+function renderSections() {
+  const container = document.getElementById('sections');
+  const data = loadSavedOrder();
+  
+  container.innerHTML = '';
+  
+  Object.keys(data).forEach(sectionKey => {
+    const section = document.createElement('div');
+    section.className = 'section';
+    section.innerHTML = `
+      <div class="section-header">
+        <h2 class="section-title">${sectionTitles[sectionKey]}</h2>
+        <span class="section-count">${data[sectionKey].length} restaurants</span>
+      </div>
+      <div class="restaurant-list" id="${sectionKey}"></div>
+    `;
+    container.appendChild(section);
+    
+    const list = document.getElementById(sectionKey);
+    data[sectionKey].forEach((restaurant, index) => {
+      const item = document.createElement('div');
+      item.className = 'restaurant-item';
+      item.dataset.name = restaurant.name;
+      item.innerHTML = `
+        <div class="drag-handle">☰</div>
+        <div class="priority-number">${index + 1}</div>
+        <div class="restaurant-info">
+          <div class="restaurant-name">${restaurant.name}</div>
+          <div class="restaurant-meta">
+            <span class="platform-badge platform-${restaurant.platform}">${restaurant.platform}</span>
+          </div>
+        </div>
+      `;
+      list.appendChild(item);
+    });
+    
+    // Initialize Sortable
+    sortables[sectionKey] = new Sortable(list, {
+      animation: 200,
+      handle: '.drag-handle',
+      ghostClass: 'sortable-ghost',
+      dragClass: 'sortable-drag',
+      onEnd: function() {
+        updatePriorityNumbers(sectionKey);
+      }
+    });
+  });
+}
+
+function updatePriorityNumbers(sectionKey) {
+  const list = document.getElementById(sectionKey);
+  const items = list.querySelectorAll('.restaurant-item');
+  items.forEach((item, index) => {
+    item.querySelector('.priority-number').textContent = index + 1;
+  });
+}
+
+function saveOrder() {
+  const data = {};
+  
+  Object.keys(restaurantData).forEach(sectionKey => {
+    data[sectionKey] = [];
+    const list = document.getElementById(sectionKey);
+    const items = list.querySelectorAll('.restaurant-item');
+    
+    items.forEach(item => {
+      const name = item.dataset.name;
+      // Find original data
+      const original = restaurantData[sectionKey].find(r => r.name === name);
+      data[sectionKey].push(original);
+    });
+  });
+  
+  localStorage.setItem('restaurantPriority', JSON.stringify(data));
+  
+  // Save to file
+  saveToFile(data);
+  
+  // Show confirmation
+  const status = document.getElementById('saveStatus');
+  status.classList.add('show');
+  setTimeout(() => status.classList.remove('show'), 2000);
+}
+
+function saveToFile(data) {
+  // Flatten to a priority list for Python
+  const priorityList = [];
+  Object.keys(data).forEach(section => {
+    data[section].forEach(restaurant => {
+      priorityList.push({
+        name: restaurant.name,
+        platform: restaurant.platform,
+        url: restaurant.url,
+        section: section
+      });
+    });
+  });
+  
+  const blob = new Blob([JSON.stringify({
+    updated_at: new Date().toISOString(),
+    priority_list: priorityList,
+    sections: data
+  }, null, 2)], {type: 'application/json'});
+  
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'restaurant-priority.json';
+  a.click();
+}
+
+function resetOrder() {
+  if (confirm('Reset to default order? This will lose your custom ordering.')) {
+    localStorage.removeItem('restaurantPriority');
+    renderSections();
+  }
+}
+
+function exportJSON() {
+  const data = loadSavedOrder();
+  saveToFile(data);
+}
+
+// Initialize
+renderSections();
+</script>
+
+</body>
+</html>

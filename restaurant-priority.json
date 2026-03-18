@@ -1,0 +1,477 @@
+{
+  "updated_at": "2026-03-15T23:39:00.000Z",
+  "priority_list": [
+    {
+      "name": "Kid Sister",
+      "platform": "resy",
+      "url": "https://resy.com/cities/phoenix-az/venues/kid-sister",
+      "section": "haventBeenYet"
+    },
+    {
+      "name": "Maple & Ash",
+      "platform": "resy",
+      "url": "https://resy.com/cities/phoenix-az/venues/maple-and-ash-scottsdale",
+      "section": "haventBeenYet"
+    },
+    {
+      "name": "Catch",
+      "platform": "resy",
+      "url": "https://resy.com/cities/phoenix-az/venues/catch-scottsdale",
+      "section": "haventBeenYet"
+    },
+    {
+      "name": "Nobu",
+      "platform": "resy",
+      "url": "https://resy.com/cities/phoenix-az/venues/nobu-scottsdale",
+      "section": "haventBeenYet"
+    },
+    {
+      "name": "Jing",
+      "platform": "resy",
+      "url": "https://resy.com/cities/phoenix-az/venues/jing-scottsdale",
+      "section": "haventBeenYet"
+    },
+    {
+      "name": "Sexy Roman",
+      "platform": "resy",
+      "url": "https://resy.com/cities/phoenix-az/venues/the-sexy-roman-scottsdale",
+      "section": "haventBeenYet"
+    },
+    {
+      "name": "Shiv Supper Club",
+      "platform": "resy",
+      "url": "https://resy.com/cities/phoenix-az/venues/shiv-supper-club",
+      "section": "haventBeenYet"
+    },
+    {
+      "name": "40 Love",
+      "platform": "opentable",
+      "url": "https://www.opentable.com/r/40-love-scottsdale",
+      "section": "wouldReturn"
+    },
+    {
+      "name": "FLINT by Baltaire",
+      "platform": "opentable",
+      "url": "https://www.opentable.com/r/flint-by-baltaire-scottsdale",
+      "section": "haventBeenYet"
+    },
+    {
+      "name": "Bourbon & Bones",
+      "platform": "opentable",
+      "url": "https://www.opentable.com/r/bourbon-and-bones-scottsdale",
+      "section": "haventBeenYet"
+    },
+    {
+      "name": "Society Swan",
+      "platform": "opentable",
+      "url": "https://www.opentable.com/r/society-swan-reservations-scottsdale",
+      "section": "haventBeenYet"
+    },
+    {
+      "name": "Cleaverman",
+      "platform": "opentable",
+      "url": "https://www.opentable.com/r/cleaverman-scottsdale",
+      "section": "haventBeenYet"
+    },
+    {
+      "name": "Hainoo",
+      "platform": "opentable",
+      "url": "https://www.opentable.com/r/hai-noon-reservations-scottsdale",
+      "section": "haventBeenYet"
+    },
+    {
+      "name": "Mowry and Cotton",
+      "platform": "opentable",
+      "url": "https://www.opentable.com/r/mowry-and-cotton-scottsdale",
+      "section": "haventBeenYet"
+    },
+    {
+      "name": "Buck and Rider",
+      "platform": "opentable",
+      "url": "https://www.opentable.com/r/buck-and-rider-scottsdale",
+      "section": "wouldReturn"
+    },
+    {
+      "name": "Uchi",
+      "platform": "resy",
+      "url": "https://resy.com/cities/phoenix-az/venues/uchi",
+      "section": "wouldReturn"
+    },
+    {
+      "name": "Pizzeria Bianco",
+      "platform": "resy",
+      "url": "https://resy.com/cities/phoenix-az/venues/pizzeria-bianco",
+      "section": "wouldReturn"
+    },
+    {
+      "name": "FnB",
+      "platform": "resy",
+      "url": "https://resy.com/cities/phoenix-az/venues/fnb",
+      "section": "wouldReturn"
+    },
+    {
+      "name": "Bacanora",
+      "platform": "resy",
+      "url": "https://resy.com/cities/phoenix-az/venues/bacanora",
+      "section": "wouldReturn"
+    },
+    {
+      "name": "Tratto",
+      "platform": "resy",
+      "url": "https://resy.com/cities/phoenix-az/venues/tratto",
+      "section": "wouldReturn"
+    },
+    {
+      "name": "Elephante",
+      "platform": "resy",
+      "url": "https://resy.com/cities/phoenix-az/venues/elephante",
+      "section": "wouldReturn"
+    },
+    {
+      "name": "Pinyon",
+      "platform": "resy",
+      "url": "https://resy.com/cities/phoenix-az/venues/pinyon",
+      "section": "wouldReturn"
+    },
+    {
+      "name": "Valentine",
+      "platform": "resy",
+      "url": "https://resy.com/cities/phoenix-az/venues/valentine",
+      "section": "wouldReturn"
+    },
+    {
+      "name": "The Ends",
+      "platform": "resy",
+      "url": "https://resy.com/cities/phoenix-az/venues/the-ends",
+      "section": "wouldReturn"
+    },
+    {
+      "name": "Vecina",
+      "platform": "resy",
+      "url": "https://resy.com/cities/phoenix-az/venues/vecina",
+      "section": "wouldReturn"
+    },
+    {
+      "name": "Huarachis",
+      "platform": "resy",
+      "url": "https://resy.com/cities/phoenix-az/venues/huarachis",
+      "section": "wouldReturn"
+    },
+    {
+      "name": "Reserve (Monarch)",
+      "platform": "tock",
+      "url": "https://www.exploretock.com/reserveoldtown",
+      "section": "specialOccasion"
+    },
+    {
+      "name": "Anhelo",
+      "platform": "resy",
+      "url": "https://resy.com/cities/phoenix-az/venues/anhelo",
+      "section": "specialOccasion"
+    },
+    {
+      "name": "Christophers",
+      "platform": "opentable",
+      "url": "https://www.opentable.com/r/christophers-scottsdale",
+      "section": "specialOccasion"
+    },
+    {
+      "name": "Killer Whale Sex Club",
+      "platform": "none",
+      "url": "",
+      "section": "cocktailBars"
+    },
+    {
+      "name": "Bitter & Twisted",
+      "platform": "none",
+      "url": "",
+      "section": "cocktailBars"
+    },
+    {
+      "name": "FYPM",
+      "platform": "none",
+      "url": "",
+      "section": "cocktailBars"
+    },
+    {
+      "name": "Legends Never Die",
+      "platform": "none",
+      "url": "",
+      "section": "cocktailBars"
+    },
+    {
+      "name": "Little Rituals",
+      "platform": "resy",
+      "url": "https://resy.com/cities/phoenix-az/venues/little-rituals",
+      "section": "cocktailBars"
+    },
+    {
+      "name": "Platform 18 - Century Grand",
+      "platform": "resy",
+      "url": "https://resy.com/cities/phoenix-az/venues/century-grand",
+      "section": "cocktailBars"
+    },
+    {
+      "name": "Grey Hen Rx",
+      "platform": "none",
+      "url": "",
+      "section": "cocktailBars"
+    },
+    {
+      "name": "Undertow",
+      "platform": "resy",
+      "url": "https://resy.com/cities/phoenix-az/venues/undertow",
+      "section": "cocktailBars"
+    },
+    {
+      "name": "Tell Your Friends",
+      "platform": "none",
+      "url": "",
+      "section": "cocktailBars"
+    },
+    {
+      "name": "The Trophy Room",
+      "platform": "none",
+      "url": "",
+      "section": "cocktailBars"
+    },
+    {
+      "name": "Carry On Airlines",
+      "platform": "none",
+      "url": "",
+      "section": "cocktailBars"
+    },
+    {
+      "name": "Highball",
+      "platform": "resy",
+      "url": "https://resy.com/cities/phoenix-az/venues/highball",
+      "section": "cocktailBars"
+    },
+    {
+      "name": "Valentine",
+      "platform": "resy",
+      "url": "https://resy.com/cities/phoenix-az/venues/valentine",
+      "section": "cocktailBars"
+    }
+  ],
+  "sections": {
+    "haventBeenYet": [
+      {
+        "name": "Kid Sister",
+        "platform": "resy",
+        "url": "https://resy.com/cities/phoenix-az/venues/kid-sister"
+      },
+      {
+        "name": "Maple & Ash",
+        "platform": "resy",
+        "url": "https://resy.com/cities/phoenix-az/venues/maple-and-ash-scottsdale"
+      },
+      {
+        "name": "Catch",
+        "platform": "resy",
+        "url": "https://resy.com/cities/phoenix-az/venues/catch-scottsdale"
+      },
+      {
+        "name": "Nobu",
+        "platform": "resy",
+        "url": "https://resy.com/cities/phoenix-az/venues/nobu-scottsdale"
+      },
+      {
+        "name": "Jing",
+        "platform": "resy",
+        "url": "https://resy.com/cities/phoenix-az/venues/jing-scottsdale"
+      },
+      {
+        "name": "Sexy Roman",
+        "platform": "resy",
+        "url": "https://resy.com/cities/phoenix-az/venues/the-sexy-roman-scottsdale"
+      },
+      {
+        "name": "Shiv Supper Club",
+        "platform": "resy",
+        "url": "https://resy.com/cities/phoenix-az/venues/shiv-supper-club"
+      },
+      {
+        "name": "FLINT by Baltaire",
+        "platform": "opentable",
+        "url": "https://www.opentable.com/r/flint-by-baltaire-scottsdale"
+      },
+      {
+        "name": "Bourbon & Bones",
+        "platform": "opentable",
+        "url": "https://www.opentable.com/r/bourbon-and-bones-scottsdale"
+      },
+      {
+        "name": "Society Swan",
+        "platform": "opentable",
+        "url": "https://www.opentable.com/r/society-swan-reservations-scottsdale"
+      },
+      {
+        "name": "Cleaverman",
+        "platform": "opentable",
+        "url": "https://www.opentable.com/r/cleaverman-scottsdale"
+      },
+      {
+        "name": "Hainoo",
+        "platform": "opentable",
+        "url": "https://www.opentable.com/r/hai-noon-reservations-scottsdale"
+      },
+      {
+        "name": "Mowry and Cotton",
+        "platform": "opentable",
+        "url": "https://www.opentable.com/r/mowry-and-cotton-scottsdale"
+      }
+    ],
+    "wouldReturn": [
+      {
+        "name": "40 Love",
+        "platform": "opentable",
+        "url": "https://www.opentable.com/r/40-love-scottsdale"
+      },
+      {
+        "name": "Buck and Rider",
+        "platform": "opentable",
+        "url": "https://www.opentable.com/r/buck-and-rider-scottsdale"
+      },
+      {
+        "name": "Uchi",
+        "platform": "resy",
+        "url": "https://resy.com/cities/phoenix-az/venues/uchi"
+      },
+      {
+        "name": "Pizzeria Bianco",
+        "platform": "resy",
+        "url": "https://resy.com/cities/phoenix-az/venues/pizzeria-bianco"
+      },
+      {
+        "name": "FnB",
+        "platform": "resy",
+        "url": "https://resy.com/cities/phoenix-az/venues/fnb"
+      },
+      {
+        "name": "Bacanora",
+        "platform": "resy",
+        "url": "https://resy.com/cities/phoenix-az/venues/bacanora"
+      },
+      {
+        "name": "Tratto",
+        "platform": "resy",
+        "url": "https://resy.com/cities/phoenix-az/venues/tratto"
+      },
+      {
+        "name": "Elephante",
+        "platform": "resy",
+        "url": "https://resy.com/cities/phoenix-az/venues/elephante"
+      },
+      {
+        "name": "Pinyon",
+        "platform": "resy",
+        "url": "https://resy.com/cities/phoenix-az/venues/pinyon"
+      },
+      {
+        "name": "Valentine",
+        "platform": "resy",
+        "url": "https://resy.com/cities/phoenix-az/venues/valentine"
+      },
+      {
+        "name": "The Ends",
+        "platform": "resy",
+        "url": "https://resy.com/cities/phoenix-az/venues/the-ends"
+      },
+      {
+        "name": "Vecina",
+        "platform": "resy",
+        "url": "https://resy.com/cities/phoenix-az/venues/vecina"
+      },
+      {
+        "name": "Huarachis",
+        "platform": "resy",
+        "url": "https://resy.com/cities/phoenix-az/venues/huarachis"
+      }
+    ],
+    "specialOccasion": [
+      {
+        "name": "Reserve (Monarch)",
+        "platform": "tock",
+        "url": "https://www.exploretock.com/reserveoldtown"
+      },
+      {
+        "name": "Anhelo",
+        "platform": "resy",
+        "url": "https://resy.com/cities/phoenix-az/venues/anhelo"
+      },
+      {
+        "name": "Christophers",
+        "platform": "opentable",
+        "url": "https://www.opentable.com/r/christophers-scottsdale"
+      }
+    ],
+    "cocktailBars": [
+      {
+        "name": "Killer Whale Sex Club",
+        "platform": "none",
+        "url": ""
+      },
+      {
+        "name": "Bitter & Twisted",
+        "platform": "none",
+        "url": ""
+      },
+      {
+        "name": "FYPM",
+        "platform": "none",
+        "url": ""
+      },
+      {
+        "name": "Legends Never Die",
+        "platform": "none",
+        "url": ""
+      },
+      {
+        "name": "Little Rituals",
+        "platform": "resy",
+        "url": "https://resy.com/cities/phoenix-az/venues/little-rituals"
+      },
+      {
+        "name": "Platform 18 - Century Grand",
+        "platform": "resy",
+        "url": "https://resy.com/cities/phoenix-az/venues/century-grand"
+      },
+      {
+        "name": "Grey Hen Rx",
+        "platform": "none",
+        "url": ""
+      },
+      {
+        "name": "Undertow",
+        "platform": "resy",
+        "url": "https://resy.com/cities/phoenix-az/venues/undertow"
+      },
+      {
+        "name": "Tell Your Friends",
+        "platform": "none",
+        "url": ""
+      },
+      {
+        "name": "The Trophy Room",
+        "platform": "none",
+        "url": ""
+      },
+      {
+        "name": "Carry On Airlines",
+        "platform": "none",
+        "url": ""
+      },
+      {
+        "name": "Highball",
+        "platform": "resy",
+        "url": "https://resy.com/cities/phoenix-az/venues/highball"
+      },
+      {
+        "name": "Valentine",
+        "platform": "resy",
+        "url": "https://resy.com/cities/phoenix-az/venues/valentine"
+      }
+    ]
+  }
+}
