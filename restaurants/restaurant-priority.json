@@ -44,12 +44,6 @@
       "section": "haventBeenYet"
     },
     {
-      "name": "40 Love",
-      "platform": "opentable",
-      "url": "https://www.opentable.com/r/40-love-scottsdale",
-      "section": "wouldReturn"
-    },
-    {
       "name": "FLINT by Baltaire",
       "platform": "opentable",
       "url": "https://www.opentable.com/r/flint-by-baltaire-scottsdale",
@@ -155,6 +149,12 @@
       "name": "Huarachis",
       "platform": "resy",
       "url": "https://resy.com/cities/phoenix-az/venues/huarachis",
+      "section": "wouldReturn"
+    },
+    {
+      "name": "40 Love",
+      "platform": "opentable",
+      "url": "https://www.opentable.com/r/40-love-scottsdale",
       "section": "wouldReturn"
     },
     {
@@ -324,11 +324,6 @@
     ],
     "wouldReturn": [
       {
-        "name": "40 Love",
-        "platform": "opentable",
-        "url": "https://www.opentable.com/r/40-love-scottsdale"
-      },
-      {
         "name": "Buck and Rider",
         "platform": "opentable",
         "url": "https://www.opentable.com/r/buck-and-rider-scottsdale"
@@ -387,6 +382,11 @@
         "name": "Huarachis",
         "platform": "resy",
         "url": "https://resy.com/cities/phoenix-az/venues/huarachis"
+      },
+      {
+        "name": "40 Love",
+        "platform": "opentable",
+        "url": "https://www.opentable.com/r/40-love-scottsdale"
       }
     ],
     "specialOccasion": [
